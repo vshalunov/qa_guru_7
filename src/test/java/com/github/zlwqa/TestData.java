@@ -2,7 +2,9 @@ package com.github.zlwqa;
 
 public class TestData {
 
-    public static String textBCPNPTechPdf = "May 2021 \n" +
+    public static String downloadPageXLS = "https://ekfgroup.com/price",
+            downloadPagePDF = "https://www.welcomebc.ca/Immigrate-to-B-C/B-C-Provincial-Nominee-Program/Documents#SI",
+            textBCPNPTechPdf = "May 2021 \n" +
             "List of 29 Eligible Occupations for BC PNP Tech  \n" +
             "NOC Job Title \n" +
             "0131 Telecommunication carriers managers \n" +

@@ -10,11 +10,11 @@ import java.io.File;
 import java.io.IOException;
 
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static com.github.zlwqa.TestData.textBCPNPTechPdf;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.github.zlwqa.TestData.*;
 
 
 public class FilesTests extends TestBase {
@@ -22,7 +22,7 @@ public class FilesTests extends TestBase {
     @Test
     @DisplayName("Скачивание PDF файла")
     void pdfFileDownloadTest() throws IOException {
-        open("https://www.welcomebc.ca/Immigrate-to-B-C/B-C-Provincial-Nominee-Program/Documents#SI");
+        open(downloadPagePDF);
         File pdf = $(withText("Key Technology Occupations")).download();
         PDF parsedPdf = new PDF(pdf);
         Assertions.assertEquals(1, parsedPdf.numberOfPages);
@@ -32,16 +32,17 @@ public class FilesTests extends TestBase {
     @Test
     @DisplayName("Скачивание XLS файла")
     void xlsFileDownloadTest() throws IOException {
-        open("https://ekfgroup.com/price");
-        File xls = $(withText("Скачать прайс-лист .XLS")).download();
+        open(downloadPageXLS);
+        File xls = $(byText("Скачать прайс-лист .XLS")).download();
 
         XLS parsedXls = new XLS(xls);
-        boolean checkPassed = parsedXls.excel
-                .getSheetAt(0)
-                .getRow(0)
-                .getCell(0)
-                .getStringCellValue()
-                .contains("test");
-    assertTrue(checkPassed);
+
+        Assertions.assertEquals(6, parsedXls.excel.getNumberOfSheets());
+        Assertions.assertEquals("Продукция EKF", parsedXls.excel.getSheetAt(0).getSheetName());
+        Assertions.assertEquals("Новинки", parsedXls.excel.getSheetAt(1).getSheetName());
+        Assertions.assertEquals("Промоцена", parsedXls.excel.getSheetAt(2).getSheetName());
+        Assertions.assertEquals("Рекламная продукция", parsedXls.excel.getSheetAt(3).getSheetName());
+        Assertions.assertEquals("Тарифные зоны", parsedXls.excel.getSheetAt(4).getSheetName());
+        Assertions.assertEquals("Подсказки", parsedXls.excel.getSheetAt(5).getSheetName());
     }
 }
