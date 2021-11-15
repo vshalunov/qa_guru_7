@@ -4,6 +4,8 @@ public class TestData {
 
     public static String downloadPageXLS = "https://ekfgroup.com/price",
             downloadPagePDF = "https://www.welcomebc.ca/Immigrate-to-B-C/B-C-Provincial-Nominee-Program/Documents#SI",
+            downloadPageTXT = "https://web-utility.com/en/sample/document/sample-txt-file-download",
+            uploadLink = "https://demoqa.com/upload-download",
             textBCPNPTechPdf = "May 2021 \n" +
             "List of 29 Eligible Occupations for BC PNP Tech  \n" +
             "NOC Job Title \n" +
