@@ -20,21 +20,23 @@ import static com.github.zlwqa.TestData.*;
 public class FilesTests extends TestBase {
 
     @Test
-    @DisplayName("Скачивание PDF файла")
-    void pdfFileDownloadTest() throws IOException {
+    @DisplayName("Отображение необходимого кол-во страниц и их содержимого в скачанном PDF файле")
+    void checkNumberOfPagesAndContentInPDFFileTest() throws IOException {
         open(downloadPagePDF);
+
         File pdf = $(withText("Key Technology Occupations")).download();
         PDF parsedPdf = new PDF(pdf);
+
         Assertions.assertEquals(1, parsedPdf.numberOfPages);
         Assertions.assertEquals(textBCPNPTechPdf, parsedPdf.text);
     }
 
     @Test
-    @DisplayName("Скачивание XLS файла")
-    void xlsFileDownloadTest() throws IOException {
+    @DisplayName("Отображение необходимого кол-ва таблиц и их названий в скачанном XLS файле")
+    void checkNumberOfSheetsAndTheirNamesInXLSFileTest() throws IOException {
         open(downloadPageXLS);
-        File xls = $(byText("Скачать прайс-лист .XLS")).download();
 
+        File xls = $(byText("Скачать прайс-лист .XLS")).download();
         XLS parsedXls = new XLS(xls);
 
         Assertions.assertEquals(6, parsedXls.excel.getNumberOfSheets());
